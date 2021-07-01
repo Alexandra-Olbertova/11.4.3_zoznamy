@@ -21,7 +21,7 @@ LOWL *lowl_create_empty(void){
 	
 	LOWL *l;
 	
-	l = (LOWL *)malloc(sizeof(LOWL));
+	l = malloc(sizeof(LOWL));
 	
 	if(l == NULL)
 		return NULL;
@@ -52,7 +52,7 @@ char lowl_cur_step_left(LOWL *list){
 
 char lowl_cur_step_right(LOWL *list){
 	
-	if(list->cur != NULL){
+	if(list->cur->next != NULL){
 		list->cur = list->cur->next;
 		return LOWL_SUCCESS;
 	}
@@ -98,13 +98,35 @@ OWN *lowl_insert_right(LOWL* list, float val){
 	
 }
 
+char lowl_delete(LOWL* list){
+	
+	if(list->cur == NULL)
+		return LOWL_FAIL;
+		
+	if(list->cur->next != NULL){
+
+		free(list->cur);
+		lowl_cur_step_right(list);
+		
+		return LOWL_OK;
+	}
+	
+	free(list->cur);
+	
+	lowl_cur_step_left(list);
+	
+	return LOWL_OK;
+	
+	
+}
 
 LOWL *lowl_create_random(unsigned int size){
 	
 	int i;
 	LOWL *l;
 	
-	l = (LOWL *)malloc(sizeof(LOWL));
+	l = malloc(sizeof(LOWL));
+	
 	if(l = NULL)
 		return NULL;
 		
@@ -130,12 +152,12 @@ void lowl_print(LOWL *list){
 
 	list->cur = list->beg;
 	
-	while(list->cur != NULL){
+	do{
 		
 		printf(" %f ", list->cur->data);
 		lowl_cur_step_right(list);
 		
-	}
+	}while(list->cur != NULL);
 		
 	
 }
