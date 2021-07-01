@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<conio.h>
 
 #define LOWL_OK 1
 #define LOWL_FAIL 0
@@ -35,7 +36,7 @@ char lowl_cur_step_left(LOWL *list){
 	OWN *prev;
 	
 	if(list->beg == list->cur)
-		BOUNDARY_REACHED;
+		return BOUNDARY_REACHED;
 		
 	prev = list->beg;
 	
@@ -75,6 +76,8 @@ OWN *lowl_insert_right(LOWL* list, float val){
 	if(list->cur == NULL){
 		list->cur = l;
 		list->cur->next = list->cur;
+		
+		
 	}
 	
 	
@@ -136,12 +139,10 @@ void lowl_destroy(LOWL *list){
 }
 
 void lowl_print(LOWL *list){
-
-	list->cur = list->beg;
 	
 	do{
-		
-		printf(" %f ", list->cur->data);
+		textcolor(RED);
+		cprintf(" %f ", list->cur->data);
 		lowl_cur_step_right(list);
 		
 	}while(list->cur != NULL);
