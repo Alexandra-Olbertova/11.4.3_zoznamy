@@ -21,11 +21,9 @@ LOWL *lowl_create_empty(void){
 	
 	LOWL *l;
 	
-	l = malloc(sizeof(LOWL));
-	
-	if(l == NULL)
+	if((l = malloc(sizeof(LOWL))) == NULL)
 		return NULL;
-		
+
 	l->beg = NULL;
 	l->cur = NULL;
 	
@@ -62,32 +60,21 @@ char lowl_cur_step_right(LOWL *list){
 }
 
 OWN *lowl_insert_left(LOWL* list, float val){
-	
-	OWN *l;
-	
-	l = malloc(sizeof(LOWL));
-	
-	if(l == NULL)
-		return NULL;
-	
+
 }
 
 OWN *lowl_insert_right(LOWL* list, float val){
 	
 	OWN *l;
 	
-	l = malloc(sizeof(LOWL));
-	
-	if(l == NULL)
+	if((l = malloc(sizeof(LOWL))) == NULL)
 		return NULL;
 	
 	l->data = val;
 	
-	if( list == NULL){
-		
-		list->beg = l;
-		list->cur = list->beg;
-		
+	if(list->cur == NULL){
+		list->cur = l;
+		list->cur->next = list->cur;
 	}
 	
 	
@@ -187,10 +174,18 @@ void lowl_concatenate(LOWL *a, LOWL *b){
 
 main(){
 	
-	LOWL *list;
+	LOWL *listA, *listB;
 	
-	list = lowl_create_empty();
-	list = lowl_create_random(3);
-	lowl_print(list);
+	listA = lowl_create_random(3);
+	listB = lowl_create_random(5);
+	lowl_print(listA);
+	lowl_print(listB);
+	
+	lowl_concatenate(listA, listB);
+	
+	lowl_destroy(listA);
+	lowl_destroy(listB);
+	
+	
 	
 }
