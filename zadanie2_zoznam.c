@@ -60,10 +60,6 @@ char lowl_cur_step_right(LOWL *list){
 		return BOUNDARY_REACHED;
 }
 
-OWN *lowl_insert_left(LOWL* list, float val){
-
-}
-
 OWN *lowl_insert_right(LOWL* list, float val){
 	
 	OWN *l;
@@ -167,26 +163,33 @@ void lowl_print(LOWL *list){
 }
 
 void lowl_concatenate(LOWL *a, LOWL *b){
+		
+	LOWL *c;
 	
-	int i;
-	
+	c = lowl_create_empty();
+		
 	a->cur = a->beg;
 	
-	for(i = 0; i < sizeof(a); i++)
-		a->cur = a->cur->next;	
+	do{
+		
+		c->cur->data = a->cur->data;
+		c->cur = c->cur->next;
+		lowl_cur_step_right(a);
+	
+	}while(a->cur != NULL);
 	
 	b->cur = b->beg;
 	
-	for(i = 0; i < sizeof(b); i++){
+	do{
 		
-		a->cur = a->cur->next;
-		a->cur->data = b->cur->data;
-		b->cur = b->cur->next;
-			
-	}
+		c->cur->data = b->cur->data;
+		c->cur = c->cur->next;
+		lowl_cur_step_right(b);
+		
+	}while(b->cur != NULL);
 	
+	free(a);
 	free(b);
-	
 }
 
 main(){
@@ -198,7 +201,7 @@ main(){
 	lowl_print(listA);
 	lowl_print(listB);
 	
-//	lowl_concatenate(listA, listB);
+	lowl_concatenate(listA, listB);
 	
 	lowl_destroy(listA);
 	lowl_destroy(listB);
