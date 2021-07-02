@@ -194,6 +194,8 @@ void lowl_concatenate(LOWL *a, LOWL *b){
 
 main(){
 	
+	srand(time(0));
+	
 	LOWL *listA, *listB;
 	
 	listA = lowl_create_random(3);
