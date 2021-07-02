@@ -96,10 +96,7 @@ LOWL *lowl_create_random(unsigned int size){
 	int i;
 	LOWL *l;
 	
-	l = malloc(sizeof(LOWL));
-	
-	if(l = NULL)
-		return NULL;
+
 		
 	l = lowl_create_empty();
 	
@@ -122,13 +119,16 @@ void lowl_destroy(LOWL *list){
 
 void lowl_print(LOWL *list){
 	
+	OWN *c;
+	
+	c = list->cur;
+	
 	do{
-		// textcolor(3);
-		// printf(" %f ", list->cur->data);
-		printf(" %f ", list->cur->data);
+		
+		printf(" %f\n", list->cur->data);
 		lowl_cur_step_right(list);
 		
-	}while(list->cur != NULL);
+	}while(list->cur != c);
 		
 	
 }
@@ -165,10 +165,10 @@ main(){
 	lowl_print(listA);
 	lowl_print(listB);
 	
-	lowl_concatenate(listA, listB);
+//	lowl_concatenate(listA, listB);
 	
-	lowl_destroy(listA);
-	lowl_destroy(listB);
+//	lowl_destroy(listA);
+//	lowl_destroy(listB);
 	
 	
 	
