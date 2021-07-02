@@ -90,14 +90,6 @@ char lowl_delete(LOWL* list){
 	if(list->cur == NULL)
 		return LOWL_FAIL;
 
-	if(list->cur->next == list->cur){
-
-		free(list->cur);
-		list->cur = NULL;
-		
-		return LOWL_OK;
-	}
-	
 	l = list->cur;
 	
 	if(l->next != NULL){
