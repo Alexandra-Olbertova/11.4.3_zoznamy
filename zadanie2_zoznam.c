@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include<stdlib.h>
-#include<time.h>
+#include <stdlib.h>
+#include <time.h>
+#include <conio.h>
 
 #define LOWL_OK 1
 #define LOWL_FAIL 0
@@ -103,11 +104,10 @@ LOWL *lowl_create_random(unsigned int size){
 	l = lowl_create_empty();
 	
 	for(i = 0; i < size; i++){
-		
-		l->cur->data = rand();
-		lowl_cur_step_right(l);
-		
+		l->cur = lowl_insert_right(l, (float)rand());
 	}
+	
+	return l;
 }
 
 void lowl_destroy(LOWL *list){
@@ -123,7 +123,9 @@ void lowl_destroy(LOWL *list){
 void lowl_print(LOWL *list){
 	
 	do{
-		printf(" %c ", list->cur->data);
+		// textcolor(3);
+		// printf(" %f ", list->cur->data);
+		printf(" %f ", list->cur->data);
 		lowl_cur_step_right(list);
 		
 	}while(list->cur != NULL);
