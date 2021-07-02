@@ -69,7 +69,7 @@ OWN *lowl_insert_right(LOWL* list, float val){
 	
 	l->data = val;
 	
-	if(list->cur == NULL){
+	if(list->cur == NULL && list->cur->next == NULL){
 		list->cur = l;
 		
 		return list->cur;
