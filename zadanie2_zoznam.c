@@ -87,25 +87,7 @@ OWN *lowl_insert_right(LOWL* list, float val){
 }
 
 char lowl_delete(LOWL* list){
-	
-	if(list->cur == NULL)
-		return LOWL_FAIL;
-		
-	if(list->cur->next != NULL){
 
-		free(list->cur);
-		lowl_cur_step_right(list);
-		
-		return LOWL_OK;
-	}
-	
-	free(list->cur);
-	
-	lowl_cur_step_left(list);
-	
-	return LOWL_OK;
-	
-	
 }
 
 LOWL *lowl_create_random(unsigned int size){
@@ -141,7 +123,7 @@ void lowl_destroy(LOWL *list){
 void lowl_print(LOWL *list){
 	
 	do{
-		printf(" %f ", list->cur->data);
+		printf(" %c ", list->cur->data);
 		lowl_cur_step_right(list);
 		
 	}while(list->cur != NULL);
