@@ -143,13 +143,16 @@ void lowl_print(LOWL *list){
 	OWN *c;
 	
 	c = list->cur;
+	list->cur = list->beg;
 	
 	do{
+		if(c == list->cur)
+			printf("-> ");
 		
-		printf(" %f\n", list->cur->data);
+		printf("%f\n", list->cur->data);
 		lowl_cur_step_right(list);
 		
-	}while(list->cur != c);
+	}while(list->cur != NULL);
 		
 	
 }
