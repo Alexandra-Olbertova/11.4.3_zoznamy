@@ -88,6 +88,41 @@ OWN *lowl_insert_right(LOWL* list, float val){
 }
 
 char lowl_delete(LOWL* list){
+	
+	OWN *l;
+	
+	if(list->cur == NULL)
+		return LOWL_FAIL;
+
+	if(list->cur->next == list->cur){
+
+		free(list->cur);
+		list->cur = NULL;
+		
+		return LOWL_OK;
+	}
+	
+	l = list->cur;
+	
+	if(l->next != NULL){
+		
+		free(list->cur);
+		list->cur = l->next;
+		
+		return LOWL_OK;
+		
+	}
+	
+	free(list->cur);
+	
+	lowl_cur_step_left(list);
+	
+	free(l);
+	
+	if(l != NULL)
+		return LOWL_FAIL;
+	
+	return LOWL_OK;
 
 }
 
@@ -95,9 +130,7 @@ LOWL *lowl_create_random(unsigned int size){
 	
 	int i;
 	LOWL *l;
-	
 
-		
 	l = lowl_create_empty();
 	
 	for(i = 0; i < size; i++){
@@ -167,8 +200,8 @@ main(){
 	
 //	lowl_concatenate(listA, listB);
 	
-//	lowl_destroy(listA);
-//	lowl_destroy(listB);
+	lowl_destroy(listA);
+	lowl_destroy(listB);
 	
 	
 	
